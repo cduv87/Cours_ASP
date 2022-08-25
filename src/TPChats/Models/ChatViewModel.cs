@@ -13,11 +13,24 @@ namespace TP.Models
         public string Couleur { get; set; }
 
 
+        public ChatViewModel(int id, string nom, int age, string couleur)
+        {
+            Id = id;
+            Nom = nom;
+            Age = age;
+            Couleur = couleur;
+        }
+
+        public ChatViewModel()
+        {
+        }
+
         public static List<ChatViewModel> GetMeuteDeChats()
         {
             var i = 1;
             return new List<ChatViewModel>
             {
+            new ChatViewModel(1,"Felix",3,"Roux"),
             new ChatViewModel{Id=i++,Nom = "Felix",Age = 3,Couleur = "Roux"},
             new ChatViewModel{Id=i++,Nom = "Minette",Age = 1,Couleur = "Noire"},
             new ChatViewModel{Id=i++,Nom = "Miss",Age = 10,Couleur = "Blanche"},
