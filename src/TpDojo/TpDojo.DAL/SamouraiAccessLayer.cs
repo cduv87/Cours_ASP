@@ -18,23 +18,22 @@ namespace TpDojo.DAL
             this.context = context;
         }
 
-        public async Task<List<ArmeEntity>> GetAllAsync()
-            => await this.context.Samourai.ToListAsync();
+        public async Task<List<SamouraiEntity>> GetAllAsync()
+          => await this.context.Samourai.Include(s => s.Arme).ToListAsync();
 
-        public async Task AddAsync(ArmeEntity sam)
+        public async Task<bool> ExistsAsync(int id)
+            => await this.context.Samourai.AnyAsync(a => a.Id == id);
+
+        public async Task<SamouraiEntity?> GetByIdAsync(int? id)
+        => await this.context.Samourai.Include(s => s.Arme).FirstOrDefaultAsync(a => a.Id == id);
+
+        public async Task AddAsync(SamouraiEntity sam)
         {
             this.context.Samourai.Add(sam);
             await this.context.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistsAsync(int id)
-    => await this.context.Samourai.AnyAsync(a => a.Id == id);
-
-        public async Task<ArmeEntity?> GetByIdAsync(int? id)
-        => await this.context.Samourai.Include(s => s.Arme).FirstOrDefaultAsync(a => a.Id == id);
-
-
-        public async Task UpdateAsync(ArmeEntity samourai)
+        public async Task UpdateAsync(SamouraiEntity samourai)
         {
             var samouraiToUpdate = await this.GetByIdAsync(samourai.Id);
 
@@ -43,6 +42,7 @@ namespace TpDojo.DAL
 
             samouraiToUpdate.Nom = samourai.Nom;
             samouraiToUpdate.Force = samourai.Force;
+            samouraiToUpdate.Arme = samourai.Arme;
 
             this.context.Update(samouraiToUpdate);
             await this.context.SaveChangesAsync();

@@ -18,10 +18,16 @@ namespace TpDojo.Business
             this.samouraiAccessLayer = samouraiAccessLayer;
             }
 
-        public async Task<List<ArmeDTO>> GetSamouraisAsync()
+        public async Task<SamouraiDTO> GetSamouraiByIdAsync(int? id)
+        {
+            var sam = await samouraiAccessLayer.GetByIdAsync(id);
+            return SamouraiDTO.FromSamourai(sam);
+        }
+
+        public async Task<List<SamouraiDTO>> GetSamouraisAsync()
         {
             var samourais = await this.samouraiAccessLayer.GetAllAsync();
-            return ArmeDTO.FromSamourais(samourais);
+            return SamouraiDTO.FromSamourais(samourais);
         }
 
 

@@ -5,44 +5,48 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TpDojo.Business;
 using TpDojo.DAL;
 using TpDojo.DAL.Models;
+using TpDojo.WEB.Models;
 
 namespace TpDojo.WEB.Controllers
 {
     public class ArmesController : Controller
     {
-        private readonly TpDojoWEBContext _context;
+        private readonly ArmeService armeService;
 
-        public ArmesController(TpDojoWEBContext context)
+        public ArmesController(ArmeService armeService)
         {
-            _context = context;
+            this.armeService = armeService;
+            
         }
 
         // GET: Armes
         public async Task<IActionResult> Index()
         {
-              return _context.Arme != null ? 
-                          View(await _context.Arme.ToListAsync()) :
-                          Problem("Entity set 'TpDojoWEBContext.Arme'  is null.");
+            var ArmesDTO = await armeService.GetArmesAsync();
+            
+            return ArmesDTO != null ?
+                          View(ArmeViewModel.FromArmessDTO(ArmesDTO)) :
+                          Problem("Armes is null.");
         }
 
         // GET: Armes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Arme == null)
+            if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var arme = await _context.Arme
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var arme = await armeService.GetArmeByIdAsync(id);
             if (arme == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(arme);
+            return this.View(ArmeViewModel.FromArmeDTO(arme));
         }
 
         // GET: Armes/Create
@@ -56,18 +60,19 @@ namespace TpDojo.WEB.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nom,Degats")] ArmeEntity arme)
+        public async Task<IActionResult> Create(ArmeViewModel arme)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(arme);
-                await _context.SaveChangesAsync();
+                var armeDto = ArmeViewModel.ToArmeDto(arme);
+                await armeService.AddArmeAsync(armeDto);
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(arme);
         }
 
-        // GET: Armes/Edit/5
+ /*       // GET: Armes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Arme == null)
@@ -116,24 +121,23 @@ namespace TpDojo.WEB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(arme);
-        }
+        }*/
 
         // GET: Armes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Arme == null)
+            if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var arme = await _context.Arme
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var arme = await this.armeService.GetArmeByIdAsync(id);
             if (arme == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(arme);
+            return this.View(ArmeViewModel.FromArmeDTO(arme));
         }
 
         // POST: Armes/Delete/5
@@ -141,23 +145,13 @@ namespace TpDojo.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Arme == null)
-            {
-                return Problem("Entity set 'TpDojoWEBContext.Arme'  is null.");
-            }
-            var arme = await _context.Arme.FindAsync(id);
-            if (arme != null)
-            {
-                _context.Arme.Remove(arme);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            await this.armeService.RemoveArmeAsync(id);
+            return this.RedirectToAction(nameof(Index));
         }
 
-        private bool ArmeExists(int id)
+        private async Task<bool> ArmeExists(int id)
         {
-          return (_context.Arme?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await this.armeService.ArmeExistsAsync(id);
         }
     }
 }

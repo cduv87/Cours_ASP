@@ -11,12 +11,12 @@ namespace TpDojo.WEB.Models
         public virtual ArmeViewModel Arme { get; set; }
 
 
-        internal static SamouraiViewModel FromSamouraiDTO(ArmeDTO? samourai)
+        internal static SamouraiViewModel FromSamouraiDTO(SamouraiDTO? samourai)
        => samourai is null
        ? new()
        : new SamouraiViewModel { Id = samourai.Id, Nom = samourai.Nom, Force = samourai.Force };
 
-        internal static List<SamouraiViewModel> FromSamouraisDTO(List<ArmeDTO> samourais)
+        internal static List<SamouraiViewModel> FromSamouraisDTO(List<SamouraiDTO> samourais)
             => samourais.Select(s => FromSamouraiDTO(s)).ToList();
     }
 }

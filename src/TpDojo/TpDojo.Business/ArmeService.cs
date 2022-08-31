@@ -18,11 +18,29 @@ namespace TpDojo.Business
             this.armeAccessLayer = armeAccessLayer;
         }
 
-        public async Task<List<ArmeDTO>> GetArmeAsync()
+        public async Task<ArmeDTO> GetArmeByIdAsync(int? id)
         {
-            var samourais = await this.armeAccessLayer.GetAllAsync();
-            return ArmeDTO.FromArmesEntity(samourais);
+            var arme = await this.armeAccessLayer.GetByIdAsync(id);
+            return ArmeDTO.FromArmeEntity(arme);
         }
 
+        public async Task<List<ArmeDTO>> GetArmesAsync()
+        {
+            var armes = await this.armeAccessLayer.GetAllAsync();
+            return ArmeDTO.FromArmesEntity(armes);
+        }
+
+        public async Task AddArmeAsync(ArmeDTO arme) => await armeAccessLayer.AddAsync(ArmeDTO.ToArmeEntity(arme));
+
+        public async Task RemoveArmeAsync(int id)
+        {
+            await armeAccessLayer.RemoveAsync(id);
+        }
+
+        public async Task<bool> ArmeExistsAsync(int id)
+        {
+            bool status = await armeAccessLayer.ExistsAsync(id);
+            return status;
+        }
     }
 }

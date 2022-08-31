@@ -16,6 +16,6 @@ namespace TpDojo.DAL
 
         public DbSet<ArmeEntity> Arme { get; set; } = default!;
 
-        public DbSet<ArmeEntity>? Samourai { get; set; }
+        public DbSet<SamouraiEntity>? Samourai { get; set; }
     }
 }

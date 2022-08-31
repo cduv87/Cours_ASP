@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<SamouraiService>();
 builder.Services.AddTransient<SamouraiAccessLayer>();
 builder.Services.AddTransient<ArmeService>();
+builder.Services.AddTransient<ArmeAccessLayer>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -27,23 +27,22 @@ namespace TpDojo.WEB.Controllers
             return View(SamouraiViewModel.FromSamouraisDTO(samouraisDTO));
         }
 
- /*       // GET: Samourais/Details/5
+        // GET: Samourais/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var samourai = await _context.Samourai
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var samourai = await this.samouraiService.GetSamouraiByIdAsync(id);
             if (samourai == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(samourai);
-        }*/
+            return this.View(SamouraiViewModel.FromSamouraiDTO(samourai));
+        }
 
         // GET: Samourais/Create
         public IActionResult Create()
@@ -51,7 +50,7 @@ namespace TpDojo.WEB.Controllers
             return View();
         }
 
-        // POST: Samourais/Create
+/*        // POST: Samourais/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +64,7 @@ namespace TpDojo.WEB.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(samourai);
-        }
+        }*/
 /*
         // GET: Samourais/Edit/5
         public async Task<IActionResult> Edit(int? id)
