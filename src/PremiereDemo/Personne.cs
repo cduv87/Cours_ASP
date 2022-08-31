@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PremiereDemo
+namespace DemoPremiere
 {
     internal class Personne
     {
@@ -22,14 +22,15 @@ namespace PremiereDemo
 
         public string? Nom { get; set; }
 
-        public int Age {
+        public int Age
+        {
             get
             {
-                return this.age;
+                return age;
             }
-            set 
+            set
             {
-                this.age = value;
+                age = value;
             }
         }
     }

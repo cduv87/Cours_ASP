@@ -1,4 +1,4 @@
-﻿namespace BO
+﻿namespace TpPizza.business.Models
 {
     public class Pate
     {

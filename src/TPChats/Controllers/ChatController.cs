@@ -1,7 +1,7 @@
 ﻿namespace TPChats.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TP.Models;
+using TPChats.Models;
 
 public class ChatController : Controller
 {

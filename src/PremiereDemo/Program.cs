@@ -1,4 +1,4 @@
-﻿namespace PremiereDemo
+﻿namespace DemoPremiere
 {
     internal class Program
     {

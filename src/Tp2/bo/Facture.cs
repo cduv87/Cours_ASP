@@ -1,4 +1,4 @@
-﻿namespace ProjetLinq.BO
+﻿namespace Tp2.bo
 {
     using System;
     using System.Collections.Generic;
@@ -8,13 +8,13 @@
 
     public class Facture
     {
-        public Facture(Decimal montant, Auteur auteur)
+        public Facture(decimal montant, Auteur auteur)
         {
-            this.Montant = montant;
-            this.Auteur = auteur;
+            Montant = montant;
+            Auteur = auteur;
         }
 
-        public Decimal Montant { get; set; }
+        public decimal Montant { get; set; }
 
         public Auteur Auteur { get; set; }
     }

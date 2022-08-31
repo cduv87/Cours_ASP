@@ -1,4 +1,4 @@
-﻿namespace ProjetLinq.BO
+﻿namespace Tp2.bo
 {
     using System;
     using System.Collections.Generic;
@@ -10,11 +10,11 @@
     {
         public Livre(int id, string titre, string synopsis, Auteur auteur, int nbPages)
         {
-            this.Id = id;
-            this.Titre = titre;
-            this.Synopsis = synopsis;
-            this.Auteur = auteur;
-            this.NbPages = nbPages;
+            Id = id;
+            Titre = titre;
+            Synopsis = synopsis;
+            Auteur = auteur;
+            NbPages = nbPages;
         }
 
         public int Id { get; set; }

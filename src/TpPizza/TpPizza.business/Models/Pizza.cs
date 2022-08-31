@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO
+namespace TpPizza.business.Models
 {
     public class Pizza
     {
@@ -15,7 +15,7 @@ namespace BO
 
         public void addIngredients(List<Ingredient> ls)
         {
-            foreach (Ingredient i in ls) this.Ingredients.Add(i);
+            foreach (Ingredient i in ls) Ingredients.Add(i);
         }
         public static List<Ingredient> IngredientsDisponibles => new List<Ingredient>
         {

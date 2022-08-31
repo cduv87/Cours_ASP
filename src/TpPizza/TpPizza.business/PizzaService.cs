@@ -1,4 +1,4 @@
-﻿using BO;
+﻿using TpPizza.business.Models;
 
 namespace TpPizza.business
 {

@@ -1,10 +1,10 @@
 ﻿namespace TpPizza.Web.ViewModels
 {
-    using BO;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Security.Cryptography.Xml;
     using TpPizza.business;
+    using TpPizza.business.Models;
 
     public class PizzaFormViewModel
     {

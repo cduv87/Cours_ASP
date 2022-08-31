@@ -1,4 +1,4 @@
-namespace TpPizza.Web.Models
+namespace TpPizza.Web.ViewModels
 {
     public class ErrorViewModel
     {

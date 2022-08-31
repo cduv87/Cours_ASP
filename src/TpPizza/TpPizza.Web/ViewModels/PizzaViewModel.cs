@@ -1,8 +1,8 @@
-﻿using BO;
-
-namespace TpPizza.Web.ViewModels
+﻿namespace TpPizza.Web.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
+    using TpPizza.business.Models;
+
     public class PizzaViewModel
     {
         public int Id { get; set; }

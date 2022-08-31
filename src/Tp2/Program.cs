@@ -1,4 +1,5 @@
 ﻿using ProjetLinq.BO;
+using Tp2.bo;
 
 List<Auteur> ListeAuteurs = new List<Auteur>();
 List<Livre> ListeLivres = new List<Livre>();
